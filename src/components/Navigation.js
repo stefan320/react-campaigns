@@ -1,21 +1,19 @@
 import {
     Navbar,
     Typography,
-    IconButton,
-    Button,
+        Button,
     Input,
   } from "@material-tailwind/react";
-  import { BellIcon, Cog6ToothIcon } from "@heroicons/react/24/solid";
    
-  export default function Navigation() {
+  export default function Example() {
     return (
-      <Navbar className="mx-auto max-w-screen-xl px-4 py-3">
+      <Navbar fullWidth>
         <div className="flex flex-wrap items-center justify-between gap-y-4 text-blue-gray-900">
           <Typography
             as="a"
             href="#"
             variant="h6"
-            className="mr-4 ml-2 cursor-pointer py-1.5"
+            className="mr-4 cursor-pointer "
           >
             Campaigns
           </Typography>
