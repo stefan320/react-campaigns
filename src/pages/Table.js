@@ -1,7 +1,7 @@
 import { Card, Typography } from "@material-tailwind/react";
-import {isAfter, isBefore} from 'date-fns';
-import { GoCircleSlash, GoCheck } from "react-icons/go";
+import { isAfter, isBefore } from 'date-fns';
 
+import { CheckCircleIcon, NoSymbolIcon } from "@heroicons/react/24/outline";
 
 const TABLE_HEAD = [
     {th: "Name", classes: "text-left" },
@@ -24,14 +24,16 @@ const checkStatus = (startDate, endDate) => {
     return status;
 } 
 
-export default function Example({tableRows}) {
+
+export default function Table( {filteredRows} ) {
   return (
-    <Card className="overflow-scroll h-full w-full">
+    <div className="px-4 mb-4">
+    <Card className="h-full w-full">
       <table className="w-full min-w-max table-auto text-left px-4">
         <thead>
           <tr>
             {TABLE_HEAD.map((head) => (
-              <th key={head.th} className={`border-b border-blue-gray-100 bg-blue-gray-50 p-4 ${head.classes}`}>
+              <th key={head.th} className={`border-b border-blue-teal-200 bg-teal-50 p-4 ${head.classes}`}>
                 <Typography
                   variant="small"
                   color="blue-gray"
@@ -44,17 +46,20 @@ export default function Example({tableRows}) {
           </tr>
         </thead>
         <tbody>
-          {tableRows.map(({name,status, startDate, endDate, Budget, id }, index) => {
+        {
+          filteredRows.map(
+            ({name,status, startDate, endDate, Budget, id }, index) => {
             status = checkStatus(startDate, endDate) ?
              <>
-                <span className="text-green-500"><GoCheck /></span>
+                <span className="text-green-500"><CheckCircleIcon  strokeWidth={2} className="h-5 w-5"/></span>
                 Active
              </> 
-             :  <>
-             <span className="text-red-500"><GoCircleSlash /></span>
+             :  
+             <>
+             <span className="text-red-500"><NoSymbolIcon strokeWidth={2} className="h-5 w-5" /></span>
              Disabled
             </>;
-            const isLast = index === tableRows.length - 1;
+            const isLast = index === filteredRows.length - 1;
             const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
             return (
               <tr key={id}>
@@ -82,13 +87,14 @@ export default function Example({tableRows}) {
                   <Typography variant="small" color="blue-gray" className="font-normal">
                     {formatter.format(Budget)}
                   </Typography>
-                </td>
-           
+                </td>         
               </tr>
             );
-          })}
+          })} 
         </tbody>
       </table>
     </Card>
+    
+    </div>
   );
 }

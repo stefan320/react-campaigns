@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@material-tailwind/react;
+
+.react-datepicker-wrapper input[type="text"]{
+    border: 1px solid currentColor;
+    border-radius: 3px;
+    max-width: 80%;
+}
+
+
+button.active\:bg-blue-500\/30:active {
+    background-color: #fff;
+}
