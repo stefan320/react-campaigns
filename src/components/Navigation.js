@@ -1,34 +1,34 @@
+import { useContext } from "react";
+import FilterContext from "../context/filtersContext";
 import {
     Navbar,
     Typography,
-        Button,
     Input,
   } from "@material-tailwind/react";
    
-  export default function Example() {
+  export default function Navigation() {
+    const { searchInput, searchChangeHandler } = useContext(FilterContext);
     return (
-      <Navbar fullWidth>
-        <div className="flex flex-wrap items-center justify-between gap-y-4 text-blue-gray-900">
+      <Navbar fullWidth className="bg-teal-600">
+        <div className="flex flex-wrap items-center justify-between gap-y-4">
           <Typography
             as="a"
             href="#"
             variant="h6"
-            className="mr-4 cursor-pointer "
+            className="mr-4 cursor-pointer"
+            color="white"
           >
             Campaigns
           </Typography>
           <div className="relative flex w-full gap-2 md:w-max">
             <Input
               type="search"
-              label="Type here..."
-              className="pr-20"
-              containerProps={{
-                className: "min-w-[288px]",
-              }}
+              label="Search By Name"
+              onChange={(ev)=> searchChangeHandler(ev)}
+              value={searchInput}
+              color="white"
+              className="border-white"
             />
-            <Button size="sm" className="!absolute right-1 top-1 rounded">
-              Search
-            </Button>
           </div>
         </div>
       </Navbar>
